@@ -6,7 +6,7 @@ function TinderCards() {
   const [people, setPeople] = useState([
     {
       name: "Ahmed Ismail",
-      url: "image.png",
+      url: "https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=600",
     },
     {
       name: "Sara Ahmed",
@@ -16,6 +16,11 @@ function TinderCards() {
 
   const swiped = (direction, nameToDelete) => {
     console.log(`Removing: ${nameToDelete}, Swipe Direction: ${direction}`);
+    //setLastDirection(direction);
+  };
+
+  const outOfFrame = (name) => {
+    console.log(name + "left the screen");
   };
 
   return (
@@ -26,11 +31,12 @@ function TinderCards() {
             className="swipe"
             key={person.name}
             onSwipe={(dir) => swiped(dir, person.name)}
-            preventSwipe={["up", "down"]} // Prevents vertical swiping
+            preventSwipe={["up", "down"]}
+            onCardLeftScreen={() => outOfFrame(person.name)}
           >
             <div
+              style={{ backgroundImage: "url(" + person.url + ")" }}
               className="card"
-              style={{ backgroundImage: `url(${person.url})` }}
             >
               <h3>{person.name}</h3>
             </div>
